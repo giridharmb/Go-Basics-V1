@@ -8,7 +8,7 @@ Sort of.
 
 You can pass pointers, too (you’re technically passing the value of the pointer — the address). And with Go’s strong typing you’ll get type checking on the underlying pointer.
 
-In this example, we pass the rect struct by value. The struct goes into the function and all operations modify the value that was passed in, but the original object remains unchanged since it wasn’t passed by reference.
+In this example, we pass the `rect` struct by value. The struct goes into the function and all operations modify the value that was passed in, but the original object remains unchanged since it wasn’t passed by reference.
 
 ```go
 // https://go.dev/play/p/TAiWwsOZ_n6
@@ -41,7 +41,7 @@ func main() {
 
 This function doesn’t do what we want it to do. The object didn’t get updated.
 
-But we can use a pointer to rect as the argument to the DoubleHeight function and effectively pass rect by reference.
+But we can use a pointer to `rect` as the argument to the `DoubleHeight` function and effectively pass `rect` by reference.
 
 ```go
 // https://go.dev/play/p/7L5QQtvzdDU
@@ -74,21 +74,21 @@ func main() {
 
 #### Use (but don’t abuse) pointers
 
-There are 2 pointer-related operators: * and &.
+There are 2 pointer-related operators: `*` and `&`.
 
 #### The * operator
 
-The * operator is called the “pointer” operator. The type *Rectangle is a pointer to a Rectangle instance. Declaring an argument of type *Rectangle means the function accepts “a pointer to a Rectangle instance”.
+The `*` operator is called the “pointer” operator. The type `*Rectangle` is a pointer to a `Rectangle` instance. Declaring an argument of type `*Rectangle` means the function accepts “a pointer to a Rectangle instance”.
 
 ```go
 var *Rectangle rect
 ```
 
-The zero-value of a pointer is nil. Super useful in lots of cases! But it’ll often lead to panic getting called when you try to call functions on a nil pointer. Awful to debug (more on that later).
+The zero-value of a pointer is `nil`. Super useful in lots of cases! But it’ll often lead to panic getting called when you try to call functions on a `nil` pointer. Awful to debug (more on that later).
 
 #### The & operator
 
-The & operator (called the “address of” operator) generates a pointer to its operand.
+The `&` operator (called the “address of” operator) generates a pointer to its operand.
 
 ```go
 rect := Rectangle{
@@ -98,7 +98,7 @@ rect := Rectangle{
 pntr := &rect
 ```
 
-To get the pointer’s underlying value, use the * operator. This is called “dereferencing the pointer.”
+To get the pointer’s underlying value, use the `*` operator. This is called “dereferencing the pointer.”
 
 ```go
 // read rect through the pointer
@@ -180,11 +180,19 @@ These errors are often difficult to troubleshoot, and they’ve cost me hours of
 
 Yeah, ok. Pointers are pretty fundamental in Go. And they aren’t unique to Go. But interfaces really screw over JS or Python engineers when they switch.
 
-Interfaces in Go are like a contract that specifies a set of methods that a type must implement in order to fulfill the contract. For example, if you have an interface called Reader that defines a Read() method, any type that implements a Read() method is said to implement the Reader interface, and can be used wherever a Reader is expected.
+`Interfaces` in Go are like a contract that specifies a set of methods that a type must implement in order to fulfill the contract. 
 
-One of the cool things about interfaces in Go is that a type can implement multiple interfaces. For example, if you have a type called File that implements the Reader and Writer interfaces, you can use a File wherever you need a Reader or a Writer, or even wherever you need something that implements both interfaces. This makes it easy to write code that is flexible and reusable.
+For example, if you have an `interface` called `Reader` that defines a `Read()` method, any type that implements a `Read()` method is said to `implement the Reader interface`, and can be used wherever a Reader is expected.
 
-Another cool thing about interfaces in Go is that you can use them to define generic algorithms or functions that work with multiple types. For example, you could write a sorting function that takes a sort.Interface as input, and can sort any type that implements the required methods.
+One of the cool things about interfaces in Go is that a type can implement multiple interfaces. 
+
+For example, if you have a type called File that implements the Reader and Writer interfaces, you can use a File wherever you need a Reader or a Writer, or even wherever you need something that implements both interfaces. 
+
+This makes it easy to write code that is flexible and reusable.
+
+Another cool thing about interfaces in Go is that you can use them to define generic algorithms or functions that work with multiple types. 
+
+For example, you could write a sorting function that takes a sort.Interface as input, and can sort any type that implements the required methods.
 
 ```go
 package sort
